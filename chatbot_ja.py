@@ -27,8 +27,8 @@ def create_tf_serving_json(data):
 def score_model(question):
   # 1. パーソナルアクセストークンを設定してください
   # 今回はデモのため平文で記載していますが、実際に使用する際には環境変数経由で取得する様にしてください。
-  #DATABRICKS_TOKEN = st.secrets['DATABRICKS_TOKEN']
-  token = os.environ.get("DATABRICKS_TOKEN")
+  token = st.secrets['DATABRICKS_TOKEN']
+  #token = os.environ.get("DATABRICKS_TOKEN")
 
   # 2. モデルエンドポイントのURLを設定してください
   url = st.secrets["DATABRICKS_URL"]
