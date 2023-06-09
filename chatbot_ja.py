@@ -17,37 +17,20 @@ st.write('''
 
 
 def create_tf_serving_json(data):
-    return {
-        "inputs": {name: data[name].tolist() for name in data.keys()}
-        if isinstance(data, dict)
-        else data.tolist()
-    }
+  return {'inputs': {name: data[name].tolist() for name in data.keys()} if isinstance(data, dict) else data.tolist()}
 
-def score_model(question):
-  # 1. パーソナルアクセストークンを設定してください
-  # 今回はデモのため平文で記載していますが、実際に使用する際には環境変数経由で取得する様にしてください。
+def score_model(dataset):
   token = st.secrets["DATABRICKS_TOKEN"]
-  #token = os.environ.get("DATABRICKS_TOKEN")
-
-  # 2. モデルエンドポイントのURLを設定してください
-  url = st.secrets["DATABRICKS_URL"]
-  st.write(url)
-  headers = {'Authorization': f'Bearer {token}',"Content-Type": "application/json",}
-
-  dataset = pd.DataFrame({'question':[question]})
-
-  ds_dict = (
-        {"dataframe_split": dataset.to_dict(orient="split")}
-        if isinstance(dataset, pd.DataFrame)
-        else create_tf_serving_json(dataset)
-    )
+  url = 'https://e2-demo-field-eng.cloud.databricks.com/serving-endpoints/llm-qabot-endpoint-jmaru-jpn/invocations'
+  headers = {'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'}
+  ds_dict = {'dataframe_split': dataset.to_dict(orient='split')} if isinstance(dataset, pd.DataFrame) else create_tf_serving_json(dataset)
   data_json = json.dumps(ds_dict, allow_nan=True)
-  response = requests.request(method="POST", headers=headers, url=url, data=data_json)
+  response = requests.request(method='POST', headers=headers, url=url, data=data_json)
   if response.status_code != 200:
-    raise Exception(
-       f"Request failed with status {response.status_code}, {response.text}"
-    )
+    raise Exception(f'Request failed with status {response.status_code}, {response.text}')
+
   return response.json()
+
 
 question = st.text_input("質問")
 
