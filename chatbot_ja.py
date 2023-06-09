@@ -20,7 +20,7 @@ def create_tf_serving_json(data):
 def score_model(dataset):
   token = st.secrets["DATABRICKS_TOKEN"]
   url = 'https://e2-demo-field-eng.cloud.databricks.com/serving-endpoints/llm-qabot-endpoint-jmaru-jpn/invocations'
-  headers = {'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'}
+  headers = {'Authorization': f'Bearer {os.environ.get("DATABRICKS_TOKEN")}', 'Content-Type': 'application/json'}
   ds_dict = {'dataframe_split': dataset.to_dict(orient='split')} if isinstance(dataset, pd.DataFrame) else create_tf_serving_json(dataset)
   data_json = json.dumps(ds_dict, allow_nan=True)
   response = requests.request(method='POST', headers=headers, url=url, data=data_json)
