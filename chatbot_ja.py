@@ -31,8 +31,8 @@ def score_model(question):
 
   # 2. モデルエンドポイントのURLを設定してください
   url = st.secrets["DATABRICKS_URL"]
-  headers = {'Authorization': f'Bearer {token}',
-             "Content-Type": "application/json",}
+  st.write(url)
+  headers = {'Authorization': f'Bearer {token}',"Content-Type": "application/json",}
 
   dataset = pd.DataFrame({'question':[question]})
 
@@ -47,7 +47,6 @@ def score_model(question):
     raise Exception(
        f"Request failed with status {response.status_code}, {response.text}"
     )
-  
   return response.json()
 
 question = st.text_input("質問")
