@@ -2,7 +2,6 @@ import streamlit as st
 import numpy as np 
 from PIL import Image
 import base64
-import io
 
 import os
 import requests
@@ -14,7 +13,6 @@ st.header('Databricks Q&A bot')
 st.write('''
 - [カスタマーサービスとサポートにおける大規模言語モデルの革命をドライブする \- Qiita](https://qiita.com/taka_yayoi/items/447ab95af2b8493a04dd)
 ''')
-
 
 def create_tf_serving_json(data):
   return {'inputs': {name: data[name].tolist() for name in data.keys()} if isinstance(data, dict) else data.tolist()}
