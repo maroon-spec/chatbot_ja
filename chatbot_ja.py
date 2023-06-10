@@ -18,8 +18,9 @@ def create_tf_serving_json(data):
   return {'inputs': {name: data[name].tolist() for name in data.keys()} if isinstance(data, dict) else data.tolist()}
 
 token = st.secrets["DATABRICKS_TOKEN"]
+url = st.secrets["DATABRICKS_URL"]
 def score_model(question):
-  url = 'https://e2-demo-field-eng.cloud.databricks.com/serving-endpoints/llm-qabot-endpoint-jmaru-jpn/invocations'
+  #url = 'https://e2-demo-field-eng.cloud.databricks.com/serving-endpoints/llm-qabot-endpoint-jmaru-jpn/invocations'
   headers = {'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'}
   
   dataset = pd.DataFrame({"question":[question]})
