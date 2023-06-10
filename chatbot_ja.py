@@ -33,13 +33,12 @@ def score_model(question):
 
 question = st.text_input("質問")
 #question = "Databricksのレイクハウスとは？"
-#question = pd.DataFrame({'question':[f"{qa}"]})
 
 if question != "":
   response = score_model(question)
 
-  #answer = response['predictions'][0]["answer"]
-  #source = response['predictions'][0]["source"]
+  answer = response['predictions'][0]["answer"]
+  source = response['predictions'][0]["source"]
 
-  #st.write(f"回答: {answer}")
-  #st.write(f"ソース: [{source}]({source})")
+  st.write(f"回答: {answer}")
+  st.write(f"ソース: [{source}]({source})")
