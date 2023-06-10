@@ -32,7 +32,7 @@ def score_model(dataset):
 question = st.text_input("質問")
 
 if question != "":
-  response = score_model(pd.DataFrame(question))
+  response = score_model(pd.DataFrame({f'question':[{question}]}))
 
   answer = response['predictions'][0]["answer"]
   source = response['predictions'][0]["source"]
