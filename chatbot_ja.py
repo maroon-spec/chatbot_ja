@@ -30,9 +30,10 @@ def score_model(dataset):
   return response.json()
 
 question = st.text_input("質問")
+qa = pd.DataFrame({'question':[f"{question}"]})
 
 if question != "":
-  response = score_model(pd.DataFrame({f'question':[{question}]}))
+  response = score_model(qa)
 
   answer = response['predictions'][0]["answer"]
   source = response['predictions'][0]["source"]
