@@ -32,8 +32,8 @@ def score_model(question):
 
   return response.json()
 
-#question = st.text_input("質問")
-question = "Databricksのレイクハウスとは？"
+question = st.text_input("質問")
+#question = "Databricksのレイクハウスとは？"
 #question = pd.DataFrame({'question':[f"{qa}"]})
 
 if question != "":
