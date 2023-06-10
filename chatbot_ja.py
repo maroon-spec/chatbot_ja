@@ -37,8 +37,8 @@ question = "Databricksのレイクハウスとは？"
 if question != "":
   response = score_model(question)
 
-  answer = response['predictions'][0]["answer"]
-  source = response['predictions'][0]["source"]
+  #answer = response['predictions'][0]["answer"]
+  #source = response['predictions'][0]["source"]
 
-  st.write(f"回答: {answer}")
-  st.write(f"ソース: [{source}]({source})")
+  #st.write(f"回答: {answer}")
+  #st.write(f"ソース: [{source}]({source})")
